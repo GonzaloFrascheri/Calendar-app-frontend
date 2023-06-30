@@ -1,25 +1,15 @@
 import { Calendar } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-import { addHours } from 'date-fns'
-import { CalendarEvent, CalendarModal, Navbar } from "../"
+import { CalendarEvent, CalendarModal, Navbar, FabAddNew, FabDelete } from "../"
 import { localizer, getMessagesEs } from '../../helpers';
+import { useUiStore, useCalendarStore } from '../../hooks';
 
-
-const events = [{
-  title: 'Cumpleanios del jefe',
-  notes: 'Hay que comprar un pastel',
-  start: new Date(),
-  end: addHours( new Date(), 2 ),
-  bgColor: '#fafafa',
-  user:{
-    id: 123,
-    name: 'Gonzalo',
-  }
-}]
 
 export const CalendarPage = () => {
 
+  const { openDateModal } = useUiStore(); 
+  const { events, setActiveEvent } = useCalendarStore();
   const [lastView, setLastView] = useState(localStorage.getItem('lasView') || 'week');
 
   const eventStyleGetter = ( event, start, end, isSelected) => {    
@@ -36,11 +26,11 @@ export const CalendarPage = () => {
   }
 
   const onDoubleClick = ( event ) => {
-
+    openDateModal();
   }
 
   const onSelect = ( event ) => {
-
+    setActiveEvent(event);
   }
 
   const onViewChanged = ( event ) => {
@@ -71,7 +61,8 @@ export const CalendarPage = () => {
     />
 
       <CalendarModal />
-      
+      <FabAddNew />
+      <FabDelete />
    </>
   )
 }
