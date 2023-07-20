@@ -1,22 +1,23 @@
-import { useCalendarStore, useUiStore } from "../../hooks"
+import { useCalendarStore, useUiStore } from '../../hooks';
 
 export const FabDelete = () => {
 
-    const { startDeleteEvent, hasEventSelected } = useCalendarStore();
+    const { startDeletingEvent, hasEventSelected } = useCalendarStore();
 
-    const handleDelete = () =>{
-        startDeleteEvent();
+    const handleDelete = () => {
+        startDeletingEvent();
     }
 
+
   return (
-    <button 
-        className="btn btn-danger fab-danger" 
+    <button
+        className="btn btn-danger fab-danger"
         onClick={ handleDelete }
         style={{
-            display: hasEventSelected ? '' : 'none'
+            display: hasEventSelected ? '': 'none'
         }}
     >
-        <i classnName= "fas fa-trash-alt"></i>
+        <i className="fas fa-trash-alt"></i>
     </button>
   )
 }
